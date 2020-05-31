@@ -5,7 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import Routes from './routes';
+import { renderRoutes } from 'react-router-config';
+import routes from './routes';
 import reducers from './reducers';
 
 const store = createStore(reducers, {}, applyMiddleware(thunk))
@@ -13,7 +14,7 @@ const store = createStore(reducers, {}, applyMiddleware(thunk))
 ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
-			<Routes/>
+			<div>{renderRoutes(routes)}</div>
 		</BrowserRouter>
 	</Provider>,
 	document.querySelector('#root')

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import users from './users';
+import auth from './authReducer'
 
 const reducers = combineReducers({
-	users
+	users,
+	auth
 })
 
 

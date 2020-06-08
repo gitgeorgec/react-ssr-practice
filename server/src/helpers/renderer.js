@@ -3,8 +3,9 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
-import routes from '../client/routes';
 import serialize from 'serialize-javascript'
+import { Helmet } from 'react-helmet';
+import routes from '../client/routes';
 
 export default (req, store, context) => {
 	const content = renderToString(
@@ -15,13 +16,16 @@ export default (req, store, context) => {
 		</Provider>
 	);
 
+	const helmet = Helmet.renderStatic();
+
 	return `
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
+		${helmet.title.toString()}
+		${helmet.meta.toString()}
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	</head>
 	<body>
